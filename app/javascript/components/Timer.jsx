@@ -1,17 +1,18 @@
 import React from "react"
 import {useState, useEffect} from "react"
 
-export default function Timer() {
-
-    const [time, setTime] = useState(0)
+export default function Timer({time, setTime, playing}) {
 
     useEffect(() => {
-        const key = setInterval(() => {
-            setTime(count => count + 4)
-        }, 40)
+        let counter
+        if (playing) {
+            counter = setInterval(() => {
+                setTime(count => count + 1)
+            }, 10)
+        }
 
-        return () => { clearInterval(key) }
-    }, []);
+        return () => { clearInterval(counter) }
+    }, [playing]);
 
     function formattedTime(centiseconds) {
         const mins = Math.floor(centiseconds / 6000)
