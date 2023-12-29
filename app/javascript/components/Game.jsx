@@ -3,7 +3,7 @@ import Waldo from '../../assets/images/waldo.jpg'
 import Timer from "./Timer";
 import Frame from "./Frame";
 
-export default function Home() {
+export default function Game() {
     const [frame, setFrame] = useState(null)
     const [time, setTime] = useState(0)
     const [playing, setPlaying] = useState(true)
