@@ -10,15 +10,17 @@ export default function Game() {
     const [playing, setPlaying] = useState(true)
 
     function moveFrame(e) {
-        setFrame([e.pageX,e.pageY])
+        normX = (e.clientX / window.innerWidth)
+        normY = (e.clientY / window.innerHeight)
+        setFrame([normX,normY])
     }
 
     function clearFrame() {
         setFrame(null)
     }
 
-    function checkFrame() { // [1200, 185]
-        if ((frame[0] >= 1160 && frame[0] <= 1240) && (frame[0] >= 145 && frame[1] <= 225)) {
+    function checkFrame() {
+        if ((frame[0] >= .763 && frame[0] <= .815) && (frame[0] >= .260 && frame[1] <= .356)) {
             setPlaying(false)
         }
         else { setTime(count => count + 1000) }
@@ -26,13 +28,13 @@ export default function Game() {
     }
 
     return (
-        <div>
+        <div className={'flex flex-col items-center'}>
             <div>
                 <h1 className={'flex justify-center p-4 text-3xl font-bold'}>Can you find Waldo?</h1>
                 <Timer time={time} setTime={setTime} playing={playing}/>
             </div>
             <Link to={'/'} className={'absolute right-[10px] top-[10px] text-blue-600'}>I give up!</Link>
-            <img src={Waldo} alt="waldo" onClick={moveFrame}/>
+            <img src={Waldo} alt="waldo" onClick={moveFrame} draggable={'false'}/>
             {frame && <Frame frame={frame} clearFrame={clearFrame} checkFrame={checkFrame}/>}
         </div>
     )
