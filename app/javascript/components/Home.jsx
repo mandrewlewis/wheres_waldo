@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import HighScores from "./HighScores";
 
 export default function Home() {
     return (
@@ -15,9 +16,7 @@ export default function Home() {
             <Link to={'/game'}>
                 <button className={'text-xl text-white bg-blue-500 px-2 py-0.5 rounded-md'}>Play</button>
             </Link>
-            <p className={'text-lg text-center'}>
-                See how you compare:
-            </p>
+            <HighScores />
         </div>
     )
 }
