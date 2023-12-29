@@ -20,6 +20,7 @@ export default function Game() {
         if ((frame[0] >= 1160 && frame[0] <= 1240) && (frame[0] >= 145 && frame[1] <= 225)) {
             setPlaying(false)
         }
+        else { setTime(count => count + 1000) }
         setFrame(null)
     }
 
