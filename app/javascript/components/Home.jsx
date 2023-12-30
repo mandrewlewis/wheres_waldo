@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import HighScores from "./HighScores";
 
 export default function Home() {
+    const navigator = useNavigate()
     const [scores, setScores] = useState(null)
     const [fetching, setFetching] = useState(true)
 
@@ -14,6 +15,17 @@ export default function Home() {
                 setFetching(false)
             })
     }, []);
+
+    function clearScores() {
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+        console.log('cleared!')
+        fetch('/scores', {
+            method: "DELETE",
+            headers: {"X-CSRF-token": token},
+        })
+            .then(res=>res.json())
+            .finally(()=>navigator(0))
+    }
 
     return (
         <div className={'flex flex-col items-center gap-8 mx-60'}>
@@ -29,6 +41,7 @@ export default function Home() {
                 <button className={'text-xl text-white bg-blue-500 px-2 py-0.5 rounded-md'}>Play</button>
             </Link>
             {!fetching && <HighScores scores={scores}/>}
+            <button onClick={()=>clearScores()} className={'text-red-600 absolute bottom-[10px] right-[10px]'}>Clear High Scores</button>
         </div>
     )
 }

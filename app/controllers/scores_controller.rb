@@ -18,6 +18,11 @@ class ScoresController < ApplicationController
     end
   end
 
+  def clear
+    Score.delete_all
+    head :ok
+  end
+
   def score_params
     params.permit(:name, :time)
   end
