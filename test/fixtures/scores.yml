@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  time: 1
+  name: Andrew
+  time: 10
 
 two:
-  name: MyString
-  time: 1
+  name: Lucy
+  time: 100
+
+three:
+  name: Haley
+  time: 80
