@@ -3,6 +3,7 @@ import Waldo from '../../assets/images/waldo.jpg'
 import Timer from "./Timer";
 import Frame from "./Frame";
 import {Link} from "react-router-dom";
+import WinModal from "./WinModal";
 
 export default function Game() {
     const [frame, setFrame] = useState(null)
@@ -36,6 +37,7 @@ export default function Game() {
             <Link to={'/'} className={'absolute right-[10px] top-[10px] text-blue-600'}>I give up!</Link>
             <img src={Waldo} alt="waldo" onClick={moveFrame} draggable={'false'}/>
             {frame && <Frame frame={frame} clearFrame={clearFrame} checkFrame={checkFrame}/>}
+            {!playing && <WinModal time={time}/>}
         </div>
     )
 }
