@@ -19,7 +19,7 @@ class ScoresController < ApplicationController
   end
 
   def clear
-    Score.delete_all
+    Score.ranked.update_all(hidden: true)
     head :ok
   end
 

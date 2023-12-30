@@ -1,3 +1,3 @@
 class Score < ApplicationRecord
-  scope :ranked, -> { order(:time) }
+  scope :ranked, -> { where(hidden: false).order(:time) }
 end
