@@ -1,5 +1,6 @@
 import React from "react"
 import {useState, useEffect} from "react"
+import {formatTime} from "../helpers";
 
 export default function Timer({time, setTime, playing}) {
 
@@ -14,16 +15,7 @@ export default function Timer({time, setTime, playing}) {
         return () => { clearInterval(counter) }
     }, [playing]);
 
-    function formattedTime(centiseconds) {
-        const mins = Math.floor(centiseconds / 6000)
-        const secs = Math.floor((centiseconds - (mins * 6000)) / 100)
-        const csecs = centiseconds - (mins * 6000) - (secs * 100)
-        return [`${mins < 10 ? '0' : ''}${mins}`,
-            `${secs < 10 ? '0' : ''}${secs}`,
-            `${csecs < 10 ? '0' : ''}${csecs}`]
-    }
-
-    const [displayMins, displaySecs, displayCsecs] = formattedTime(time)
+    const [displayMins, displaySecs, displayCsecs] = formatTime(time)
 
     return (
         <div className="timer font-mono flex justify-center text-xl">

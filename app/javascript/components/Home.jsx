@@ -1,8 +1,20 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import HighScores from "./HighScores";
 
 export default function Home() {
+    const [scores, setScores] = useState(null)
+    const [fetching, setFetching] = useState(true)
+
+    useEffect(() => {
+        fetch('/scores')
+            .then(res=>res.json())
+            .then(json=> {
+                setScores(json)
+                setFetching(false)
+            })
+    }, []);
+
     return (
         <div className={'flex flex-col items-center gap-8 mx-60'}>
             <h1 className={'text-5xl pt-8'}>
@@ -16,7 +28,7 @@ export default function Home() {
             <Link to={'/game'}>
                 <button className={'text-xl text-white bg-blue-500 px-2 py-0.5 rounded-md'}>Play</button>
             </Link>
-            <HighScores />
+            {!fetching && <HighScores scores={scores}/>}
         </div>
     )
 }

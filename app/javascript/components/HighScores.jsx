@@ -1,27 +1,24 @@
 import React from 'react'
+import {formatTime} from "../helpers";
 
 export default function HighScores({ scores }) {
-    scores = [
-        { 'name': 'Andrew', 'score': '01:12:44' },
-        { 'name': 'Haley', 'score': '00:45:87' }
-    ]
-
     return (
         <div className={'flex flex-col items-center gap-6 mt-8'}>
             <h2 className={'text-2xl'}>🏆 High Scores 🏆</h2>
-            <table className={'w-[200px] text-center'}>
+            <table className={'text-center'}>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Time</th>
+                        <th className={'w-[130px]'}>Name</th>
+                        <th className={'w-[130px]'}>Time</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={'font-mono'}>
                     {scores && scores.map(score => {
+                        [min, sec, csec] = formatTime(score.time)
                         return (
-                            <tr key={score['name']}>
-                                <td>{score['name']}</td>
-                                <td>{score['score']}</td>
+                            <tr key={score.id}>
+                                <td>{score.name}</td>
+                                <td>{min}:{sec}:{csec}</td>
                             </tr>
                         )})}
                 </tbody>
